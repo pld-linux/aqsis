@@ -2,7 +2,7 @@ Summary:	Aqsis Rendering System
 Summary(pl):	System renderuj±cy Aqsis
 Name:		aqsis
 Version:	0.9.2
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
