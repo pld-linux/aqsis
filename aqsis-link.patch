@@ -1,0 +1,10 @@
+--- aqsis-0.9.0/libaqsistypes/posix/Makefile.am.orig	2003-11-30 01:13:01.000000000 +0100
++++ aqsis-0.9.0/libaqsistypes/posix/Makefile.am	2003-12-21 22:12:28.954910256 +0100
+@@ -5,7 +5,6 @@
+ AM_CFLAGS=@AQSIS_CFLAGS@
+ 
+ libplatform_la_SOURCES = aqsis_compiler.h criticalsection.h semaphore.cpp semaphore.h share.h file_system.cpp
+-libplatform_la_LDFLAGS = -rpath $(libdir) -static
+ 
+ pkginclude_HEADERS = share.h
+ 
