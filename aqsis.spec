@@ -57,7 +57,8 @@ Pliki nag³ówkowe systemu renderuj±cego Aqsis.
 %{__autoheader}
 %{__automake}
 %configure
-%{__make}
+%{__make} \
+	CFLAGS="%{rpmcflags} -fPIC"
 
 %install
 rm -rf $RPM_BUILD_ROOT
