@@ -1,16 +1,17 @@
 Summary:	Aqsis Rendering System
 Summary(pl):	System renderuj±cy Aqsis
 Name:		aqsis
-Version:	0.9.2
+Version:	1.0.0
 Release:	1
 License:	GPL v2
 Group:		Applications/Graphics
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	db643748ebfbf7e14aa7f3b0fa2c143a
+Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
+# Source0-md5:	1d144d49cda08aa8e1f6c83291e4812b
 URL:		http://aqsis.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	fltk-devel
 BuildRequires:	glut-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
