@@ -1,13 +1,12 @@
 Summary:	Aqsis Rendering System
 Summary(pl):	System renderuj±cy Aqsis
 Name:		aqsis
-Version:	0.9.0
+Version:	0.9.1
 Release:	0.1
 License:	GPL v2
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	c4b3bb773f2016d24ec5659b43fa50cf
-Patch0:		%{name}-link.patch
+# Source0-md5:	25ff47648aee39d0be4294628d143a7e
 URL:		http://aqsis.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.50
@@ -50,12 +49,6 @@ Pliki nag³ówkowe systemu renderuj±cego Aqsis.
 
 %prep
 %setup -q
-%patch0 -p1
-
-# kill libtool.m4 - extract HAVE_LIBTIFF, HAVE_LIBZLIB, MDL_HAVE_OPENGL
-head -n 48 acinclude.m4 > acinc.tmp
-tail -n +3787 acinclude.m4 >> acinc.tmp
-mv -f acinc.tmp acinclude.m4
 
 %build
 %{__libtoolize}
