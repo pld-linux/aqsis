@@ -1,12 +1,12 @@
 Summary:	Aqsis Rendering System
 Summary(pl):	System renderuj±cy Aqsis
 Name:		aqsis
-Version:	1.0.0
+Version:	1.0.1
 Release:	1
-License:	GPL v2
+License:	GPL v2 / LGPL v2.1
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
-# Source0-md5:	1d144d49cda08aa8e1f6c83291e4812b
+# Source0-md5:	17e58818ab647f002c642c8abe591e35
 URL:		http://aqsis.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.50
@@ -82,6 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/lib*.so*
+%{_libdir}/%{name}/displays.ini
 %{_datadir}/%{name}
 %{_mandir}/man1/aqsis.1*
 
