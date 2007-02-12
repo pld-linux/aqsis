@@ -1,5 +1,5 @@
 Summary:	Aqsis Rendering System
-Summary(pl.UTF-8):   System renderujący Aqsis
+Summary(pl.UTF-8):	System renderujący Aqsis
 Name:		aqsis
 Version:	1.0.1
 Release:	1
@@ -34,7 +34,7 @@ RenderMan firmy Pixar.
 
 %package devel
 Summary:	Header files for Aqsis Rendering System
-Summary(pl.UTF-8):   Pliki nagłówkowe systemu renderującego Aqsis
+Summary(pl.UTF-8):	Pliki nagłówkowe systemu renderującego Aqsis
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
