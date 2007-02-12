@@ -1,5 +1,5 @@
 Summary:	Aqsis Rendering System
-Summary(pl):	System renderuj±cy Aqsis
+Summary(pl.UTF-8):   System renderujÄ…cy Aqsis
 Name:		aqsis
 Version:	1.0.1
 Release:	1
@@ -27,14 +27,14 @@ The Aqsis Rendering System consists of a set of libraries and
 applications for creating high-quality computer imagery using the
 Pixar RenderMan Interface.
 
-%description -l pl
-System renderuj±cy Aqsis sk³ada siê z zestawu bibliotek i programów do
-tworzenia wysokiej jako¶ci obrazów komputerowych z u¿yciem interfejsu
+%description -l pl.UTF-8
+System renderujÄ…cy Aqsis skÅ‚ada siÄ™ z zestawu bibliotek i programÃ³w do
+tworzenia wysokiej jakoÅ›ci obrazÃ³w komputerowych z uÅ¼yciem interfejsu
 RenderMan firmy Pixar.
 
 %package devel
 Summary:	Header files for Aqsis Rendering System
-Summary(pl):	Pliki nag³ówkowe systemu renderuj±cego Aqsis
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe systemu renderujÄ…cego Aqsis
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -45,8 +45,8 @@ Requires:	zlib-devel
 %description devel
 Header files for Aqsis Rendering System.
 
-%description devel -l pl
-Pliki nag³ówkowe systemu renderuj±cego Aqsis.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe systemu renderujÄ…cego Aqsis.
 
 %prep
 %setup -q
