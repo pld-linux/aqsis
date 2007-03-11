@@ -7,6 +7,8 @@
 #   not be needed.
 # - Check why the second stage of compilation ignores CXX and CXXFLAGS and
 #   fix it of course :)
+# - Proper configuration files handling by SPEC.
+# - Fix paths in configuration file.
 Summary:	Aqsis Rendering System
 Summary(pl.UTF-8):	System Renderujący Aqsis
 Name:		aqsis
