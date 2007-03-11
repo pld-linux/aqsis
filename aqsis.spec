@@ -71,15 +71,16 @@ export CC='%{__cc}'
 export CFLAGS='%{rpmcflags}'
 # WARNING! If you'll change the sysconfdir argument below, remember to
 # make apriopriate change in aqsis-scons-paths.patch!
-%{scons} \
-	install_prefix="$RPM_BUILD_ROOT%{_prefix}" \
-	sysconfdir="$RPM_BUILD_ROOT/etc/%{name}"
+%scons \
+	install_prefix=$RPM_BUILD_ROOT%{_prefix} \
+	sysconfdir=$RPM_BUILD_ROOT/etc/%{name}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/%{name},%{name},%{_bindir},%{_libdir},%{_datadir}/%{name}}
 
-%{scons} install_prefix="$RPM_BUILD_ROOT%{_prefix}" install
+%scons install_prefix=$RPM_BUILD_ROOT%{_prefix} \
+	install
 #rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
 #mv $RPM_BUILD_ROOT%{_usr}/etc $RPM_BUILD_ROOT
 
