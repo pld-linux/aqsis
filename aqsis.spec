@@ -18,7 +18,7 @@ License:	GPL v2 / LGPL v2.1
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
 # Source0-md5:	ae9bb1c4b22e396fd7ce84ee3e13cb86
-Patch0:		aqsis-scons-paths.patch
+Patch0:		%{name}-scons-paths.patch
 URL:		http://aqsis.sourceforge.net/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	bison >= 1.35
@@ -30,6 +30,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel >= 3.7.1
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxslt-progs
+BuildRequires:	rpmbuild(macros) >= 1.337
 BuildRequires:	zlib-devel >= 1.1.4
 Provides:	renderman-engine
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -93,15 +94,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ReleaseNotes README
+/etc/%{name}
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so*
-%dir %{_libdir}/%{name}/
+%dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/*.so
-%dir %{_libdir}/%{name}/plugins/
+%dir %{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
-%{_libdir}/%{name}/lib*.so*
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %{_datadir}/%{name}
-/etc/%{name}
 
 %files devel
 %defattr(644,root,root,755)
