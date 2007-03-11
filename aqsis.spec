@@ -1,24 +1,34 @@
+# TODO:
+# - Check to see if splitting plugins into several packages makes any sense
+#   (probably not).
+# - Check that everything works as expected.
+# - Remove duplications in %files section.
+# - Fix aqsis-scons-paths.patch so modyfing it after sysconfdir change will
+#   not be needed.
+# - Check why the second stage of compilation ignores CXX and CXXFLAGS and
+#   fix it of course :)
 Summary:	Aqsis Rendering System
-Summary(pl.UTF-8):	System renderujący Aqsis
+Summary(pl.UTF-8):	System Renderujący Aqsis
 Name:		aqsis
-Version:	1.0.1
-Release:	1
+Version:	1.2.0
+Release:	0.1
 License:	GPL v2 / LGPL v2.1
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
-# Source0-md5:	17e58818ab647f002c642c8abe591e35
+# Source0-md5:	ae9bb1c4b22e396fd7ce84ee3e13cb86
+Patch0:		aqsis-scons-paths.patch
 URL:		http://aqsis.sourceforge.net/
-BuildRequires:	OpenGL-devel
-BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
-BuildRequires:	fltk-devel
-BuildRequires:	glut-devel
-BuildRequires:	libjpeg-devel
+BuildRequires:	OpenEXR-devel
+BuildRequires:	bison >= 1.35
+BuildRequires:	boost-devel >= 1.32.0
+BuildRequires:	flex >= 2.5.4
+BuildRequires:	fltk-devel >= 1.1.0
+BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtiff-devel
+BuildRequires:	libtiff-devel >= 3.7.1
 BuildRequires:	libtool >= 2:1.5
-BuildRequires:	log4cpp-devel
-BuildRequires:	zlib-devel
+BuildRequires:	libxslt-progs
+BuildRequires:	zlib-devel >= 1.1.4
 Provides:	renderman-engine
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -34,7 +44,7 @@ RenderMan firmy Pixar.
 
 %package devel
 Summary:	Header files for Aqsis Rendering System
-Summary(pl.UTF-8):	Pliki nagłówkowe systemu renderującego Aqsis
+Summary(pl.UTF-8):	Pliki nagłówkowe Systemu Renderującego Aqsis
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -50,24 +60,26 @@ Pliki nagłówkowe systemu renderującego Aqsis.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure
-%{__make} \
-	CFLAGS="%{rpmcflags} -fPIC"
+export CXX='%{__cxx}'
+export CXXFLAGS='%{rpmcflags}'
+export CC='%{__cc}'
+export CFLAGS='%{rpmcflags}'
+# WARNING! If you'll change the sysconfdir argument below, remember to
+# make apriopriate change in aqsis-scons-paths.patch!
+%{scons} \
+	install_prefix="$RPM_BUILD_ROOT%{_prefix}" \
+	sysconfdir="$RPM_BUILD_ROOT/etc/%{name}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{/etc/%{name},%{name},%{_bindir},%{_libdir},%{_datadir}/%{name}}
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
+%{scons} install_prefix="$RPM_BUILD_ROOT%{_prefix}" install
+#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
+#mv $RPM_BUILD_ROOT%{_usr}/etc $RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,17 +89,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README
+%doc AUTHORS ReleaseNotes README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/lib*.so*
+%dir %{_libdir}/%{name}/
+%attr(755,root,root) %{_libdir}/%{name}/*.so
+%dir %{_libdir}/%{name}/plugins/
+%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
 %{_libdir}/%{name}/lib*.so*
-%{_libdir}/%{name}/displays.ini
 %{_datadir}/%{name}
-%{_mandir}/man1/aqsis.1*
+/etc/%{name}
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+#%attr(755,root,root) %{_libdir}/lib*.so
+#%{_libdir}/lib*.la
 %{_includedir}/%{name}
