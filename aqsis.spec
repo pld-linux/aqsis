@@ -31,6 +31,7 @@ BuildRequires:	libtiff-devel >= 3.7.1
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxslt-progs
 BuildRequires:	rpmbuild(macros) >= 1.337
+BuildRequires:	scons
 BuildRequires:	zlib-devel >= 1.1.4
 Provides:	renderman-engine
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
