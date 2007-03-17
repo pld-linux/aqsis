@@ -5,7 +5,7 @@ Summary:	Aqsis Rendering System
 Summary(pl.UTF-8):	System Renderujący Aqsis
 Name:		aqsis
 Version:	1.2.0
-Release:	0.2
+Release:	0.3
 License:	GPL v2 / LGPL v2.1
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
@@ -66,12 +66,6 @@ Pliki nagłówkowe Systemu Renderującego Aqsis.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/%{name},%{name},%{_bindir},%{_libdir},%{_datadir}/%{name}}
 
-# @LIBDIR@, @SHAREDIR@ and @CONFDIR@ comes from the aqsis-scons-paths patch
-sed -e 's:@LIBDIR@:%{_libdir}:g' -i SConstruct
-sed -e 's:@SHAREDIR@:%{_datadir}/%{name}:g' \
-    -e 's:@CONFDIR@:/etc/%{name}:g' \
-    -i platform/default/SConscript
-
 export CXX='%{__cxx}'
 export CXXFLAGS='%{rpmcflags}'
 export CC='%{__cc}'
@@ -79,6 +73,9 @@ export CFLAGS='%{rpmcflags}'
 %scons \
 	install_prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT/etc/%{name} \
+	pld_pluginsdir=%{_libdir}/%{name}/plugins \
+	pld_shadersdir=%{_datadir}/%{name}/shaders \
+	pld_configdir=/etc/%{name} \
 	install
 sed -e "s:$RPM_BUILD_ROOT::g" -i $RPM_BUILD_ROOT/etc/%{name}/aqsisrc
 
