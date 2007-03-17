@@ -1,8 +1,6 @@
 # TODO:
 # - Check that everything works as expected.
 # - Remove duplications in %files section.
-# - Proper configuration files handling by SPEC.
-# - Fix paths in configuration file.
 Summary:	Aqsis Rendering System
 Summary(pl.UTF-8):	System Renderujący Aqsis
 Name:		aqsis
@@ -82,7 +80,7 @@ export CFLAGS='%{rpmcflags}'
 	install_prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT/etc/%{name} \
 	install
-#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
+sed -e "s:$RPM_BUILD_ROOT::g" -i $RPM_BUILD_ROOT/etc/%{name}/aqsisrc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,7 +91,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ReleaseNotes README
-/etc/%{name}
+%dir /etc/%{name}
+%config(noreplace) %verify(not md5 mtime size) /etc/%{name}/*
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so*
 %dir %{_libdir}/%{name}
@@ -105,6 +104,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/lib*.so
-#%{_libdir}/lib*.la
 %{_includedir}/%{name}
