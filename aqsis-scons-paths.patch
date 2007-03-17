@@ -6,7 +6,7 @@ diff -Nru aqsis-1.2.0.orig/SConstruct aqsis-1.2.0/SConstruct
  env.AppendUnique(CPPPATH = ['$boost_include_path'])
  
 -env.AppendUnique(CPPDEFINES=[('DEFAULT_PLUGIN_PATH', '\\"' + env.Dir('${PLUGINDIR}').abspath + '\\"')])
-+env.AppendUnique(CPPDEFINES=[('DEFAULT_PLUGIN_PATH', '\\"/usr/lib/aqsis/plugins\\"')])
++env.AppendUnique(CPPDEFINES=[('DEFAULT_PLUGIN_PATH', '\\"@LIBDIR@/aqsis/plugins\\"')])
  
  #
  # Enable MP dumping mode if specified
@@ -19,8 +19,8 @@ diff -Nru aqsis-1.2.0.orig/platform/default/SConscript aqsis-1.2.0/platform/defa
  # getting a running program's install path on unix-like systems.
 -env.AppendUnique(CPPDEFINES=[('DEFAULT_RC_PATH', '\\"' + env.Dir('$SYSCONFDIR').abspath + '\\"')])
 -env.AppendUnique(CPPDEFINES=[('DEFAULT_SHADER_PATH', '\\"' + env.Dir('$SHADERDIR').abspath + '\\"')])
-+env.AppendUnique(CPPDEFINES=[('DEFAULT_RC_PATH', '\\"/etc/aqsis\\"')])
-+env.AppendUnique(CPPDEFINES=[('DEFAULT_SHADER_PATH', '\\"/usr/share/aqsis/shaders\\"')])
++env.AppendUnique(CPPDEFINES=[('DEFAULT_RC_PATH', '\\"@CONFDIR@\\"')])
++env.AppendUnique(CPPDEFINES=[('DEFAULT_SHADER_PATH', '\\"@SHAREDIR@/shaders\\"')])
  env.Replace(SHLIB_VERSION_SUFFIX = '.%d.%d' %(version.major, version.minor))
  env.AppendUnique(SHLINKFLAGS=['-Wl,-soname=${TARGET.file}.%d' %version.major])
  
