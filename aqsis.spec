@@ -1,11 +1,8 @@
-# TODO:
-# - Check that everything works as expected.
-# - Remove duplications in %files section.
 Summary:	Aqsis Rendering System
 Summary(pl.UTF-8):	System Renderujący Aqsis
 Name:		aqsis
 Version:	1.2.0
-Release:	0.3
+Release:	1
 License:	GPL v2 / LGPL v2.1
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
@@ -64,7 +61,7 @@ Pliki nagłówkowe Systemu Renderującego Aqsis.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/%{name},%{name},%{_bindir},%{_libdir},%{_datadir}/%{name}}
+install -d $RPM_BUILD_ROOT{/etc/%{name},%{name},%{_bindir},%{_libdir},%{_datadir}/%{name},%{_examplesdir}}
 
 export CXX='%{__cxx}'
 export CXXFLAGS='%{rpmcflags}'
@@ -78,6 +75,8 @@ export CFLAGS='%{rpmcflags}'
 	pld_configdir=/etc/%{name} \
 	install
 sed -e "s:$RPM_BUILD_ROOT::g" -i $RPM_BUILD_ROOT/etc/%{name}/aqsisrc
+find $RPM_BUILD_ROOT -name '*.bat' -exec rm {} \;
+mv $RPM_BUILD_ROOT%{_datadir}/%{name}/content $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,11 +92,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so*
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/*.so
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so
 %dir %{_libdir}/%{name}/plugins
 %attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
-%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %{_datadir}/%{name}
+%{_examplesdir}/%{name}-%{version}
 
 %files devel
 %defattr(644,root,root,755)
