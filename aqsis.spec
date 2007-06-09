@@ -2,7 +2,7 @@ Summary:	Aqsis Rendering System
 Summary(pl.UTF-8):	System Renderujący Aqsis
 Name:		aqsis
 Version:	1.2.0
-Release:	1
+Release:	2
 License:	GPL v2 / LGPL v2.1
 Group:		Applications/Graphics
 Source0:	http://dl.sourceforge.net/aqsis/%{name}-%{version}.tar.gz
@@ -12,6 +12,7 @@ URL:		http://aqsis.sourceforge.net/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	bison >= 1.35
 BuildRequires:	boost-devel >= 1.32.0
+BuildRequires:	boost-array-devel
 BuildRequires:	flex >= 2.5.4
 BuildRequires:	fltk-devel >= 1.1.0
 BuildRequires:	libjpeg-devel >= 6b
@@ -54,6 +55,9 @@ Pliki nagłówkowe Systemu Renderującego Aqsis.
 %prep
 %setup -q
 %patch0 -p1
+
+sed -i -e "s#'lib'#'%{_lib}'#g" SConstruct
+sed -i -e 's#/lib#/%{_lib}#g' platform/default/Options.py
 
 %build
 # We cannot build the targets here, because 'scons install' fires the entire
