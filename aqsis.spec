@@ -11,8 +11,7 @@ Patch0:		%{name}-scons-paths.patch
 URL:		http://aqsis.sourceforge.net/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	bison >= 1.35
-BuildRequires:	boost-devel >= 1.32.0
-BuildRequires:	boost-array-devel
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	flex >= 2.5.4
 BuildRequires:	fltk-devel >= 1.1.0
 BuildRequires:	libjpeg-devel >= 6b
